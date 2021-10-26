@@ -3,7 +3,9 @@ using UnityEngine.Events;
 
 public class UnitHealth : MonoBehaviour
 {
-    public float Health { get { return _health.Value; } }
+    public float Health => _health.Value;
+    public FloatSO HealthSO => _health;
+    public FloatSO MaxHealthSO => _maxHealth;
 
     public UnityEvent OnDie;
     public UnityEvent OnTakeDamage;

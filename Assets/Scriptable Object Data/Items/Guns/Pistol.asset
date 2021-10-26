@@ -20,7 +20,7 @@ MonoBehaviour:
   _upgradeable: 1
   _description: 
   _level: 0
-  _baseUpgradeCost: 25
+  _baseUpgradeCost: 35
   _baseFireRate: 1.5
   _fireRateGrowth: 0.05
   _baseDamage: 5
