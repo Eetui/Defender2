@@ -15,25 +15,30 @@ public class UnitHealth : MonoBehaviour
     [SerializeField] private FloatSO _health;
 
 
-
     private void Awake()
-    {
-        if (_health != null) _health.SetValue(_maxHealth.Value);
-    }
-
-    public void Init(float maxHealth)
     {
         if (_maxHealth == null)
         {
             _maxHealth = ScriptableObject.CreateInstance<FloatSO>();
-            _maxHealth.SetValue(maxHealth);
         }
 
         if (_health == null)
         {
             _health = ScriptableObject.CreateInstance<FloatSO>();
         }
+    }
+    private void OnEnable()
+    {
+        InitHealth();
+    }
 
+    private void InitHealth()
+    {
+        if (_health != null) _health.SetValue(_maxHealth.Value);
+    }
+    public void Init(float maxHealth)
+    {
+        _maxHealth.SetValue(maxHealth);
         _health.SetValue(_maxHealth.Value);
     }
 

@@ -6,14 +6,9 @@ public class RotateObject : MonoBehaviour
 {
     [SerializeField] private float defaultAngle = 90f;
 
-    private void Start()
+    public void RotateObjectToDirection()
     {
-        RotateObjectToDirection(Vector3.zero);
-    }
-
-    private void RotateObjectToDirection(Vector3 direction)
-    {
-        var dir = direction - transform.position;
+        var dir = Vector3.zero - transform.position;
         dir.Normalize();
 
         var rotation = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

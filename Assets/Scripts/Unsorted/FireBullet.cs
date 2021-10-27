@@ -9,10 +9,24 @@ public class FireBullet : Bullet
 
     private float _speed;
 
-    public override void Start()
+    private void OnEnable()
+    {
+        if (AmmoSO != null)
+        {
+            _speed = AmmoSO.Speed;
+            StartCoroutine(LerpSizeAndSpeed(_duration));
+        }
+    }
+
+    private void Start()
     {
         _speed = AmmoSO.Speed;
         StartCoroutine(LerpSizeAndSpeed(_duration));
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 
     public override void FixedUpdate()
@@ -33,6 +47,6 @@ public class FireBullet : Bullet
             yield return null;
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

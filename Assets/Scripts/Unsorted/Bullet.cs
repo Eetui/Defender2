@@ -14,14 +14,14 @@ public class Bullet : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public virtual void Start()
-    {
-        Destroy(gameObject, 5f);
-    }
-
     public virtual void FixedUpdate()
     {
         _rb.velocity = transform.up * AmmoSO.Speed;
+
+        if (!_spriteRenderer.isVisible)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public virtual void SetUpBullet(AmmoSO ammoSO, float damage)

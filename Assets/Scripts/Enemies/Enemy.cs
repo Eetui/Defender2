@@ -1,4 +1,5 @@
  using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(UnitHealth))]
 public class Enemy : MonoBehaviour
@@ -9,6 +10,8 @@ public class Enemy : MonoBehaviour
     public EnemyStats Stats => _stats;
 
     private UnitHealth health;
+
+    public UnityEvent OnSpawn;
 
     private void OnEnable()
     {
@@ -41,13 +44,13 @@ public class Enemy : MonoBehaviour
             if(!(bullet is FireBullet))
             {
                 health.TakeDamage(bullet.Damage);
-                Destroy(collision.gameObject);
+                collision.gameObject.SetActive(false);
             }
         }
 
         if (collision.CompareTag("Base"))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
     }
@@ -65,6 +68,6 @@ public class Enemy : MonoBehaviour
 
     private void Kill()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

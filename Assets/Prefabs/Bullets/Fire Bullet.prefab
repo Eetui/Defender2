@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6796351695892111501}
   - component: {fileID: 7807699120605293115}
   - component: {fileID: 6206481520043804415}
+  - component: {fileID: 9216084781969096987}
   m_Layer: 0
   m_Name: Fire Bullet
   m_TagString: Untagged
@@ -147,3 +148,15 @@ MonoBehaviour:
   _startSize: {x: 0.1, y: 0.1, z: 1}
   _endSize: {x: 2, y: 0.5, z: 1}
   _duration: 2
+--- !u!114 &9216084781969096987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6206481520043804412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6080b8eca6bb9f347aa24e8c21ba43a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

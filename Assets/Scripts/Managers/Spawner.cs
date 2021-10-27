@@ -16,6 +16,8 @@ public class Spawner : MonoBehaviour
     private WaitForSecondsRealtime waitForSecondsRealTime = new WaitForSecondsRealtime(0.5f);
     private CameraBounds camBounds; //used for the spawn point
 
+    private ObjectPooler _objectPool;
+
     //events
     [SerializeField] private StartOfRound startRound;
     [SerializeField] private EndOfRound endRound;
@@ -30,6 +32,16 @@ public class Spawner : MonoBehaviour
     private void OnEnable()
     {
         _input.OnNextRoundEvent += StartRound;
+    }
+
+    private void Start()
+    {
+        _objectPool = ObjectPooler.Instance;
+
+        foreach (var enemy in enemiesToSpawn)
+        {
+            _objectPool.InitPool(enemy.gameObject, 10);
+        }
     }
 
     private void OnDisable()
@@ -62,7 +74,10 @@ public class Spawner : MonoBehaviour
             var amountToSpawn = spawnAmount[i];
             while (amountToSpawn > 0)
             {
-                Instantiate(enemiesToSpawn[i].gameObject, camBounds.GetRandomPointOffScreen(), Quaternion.identity);
+                var enemyToSpawn = _objectPool.GetObject(enemiesToSpawn[i].gameObject);
+                enemyToSpawn.transform.position = camBounds.GetRandomPointOffScreen();
+                enemyToSpawn.GetComponent<Enemy>().OnSpawn.Invoke();
+
                 amountToSpawn--;
                 yield return waitForSecondsRealTime;
             }

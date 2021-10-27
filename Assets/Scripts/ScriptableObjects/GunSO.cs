@@ -59,7 +59,9 @@ public class GunSO : ItemSO, IShootable
 
     public void Shoot(Vector3 ShootingPoint, Quaternion quaternion)
     {
-        var ammo = Instantiate(Ammo.baseBulletPrefab, ShootingPoint, quaternion);
+        var ammo = ObjectPooler.Instance.GetObject(Ammo.baseBulletPrefab);
+        ammo.transform.position = ShootingPoint;
+        ammo.transform.rotation = quaternion;
 
         if (ammo.TryGetComponent(out Bullet bullet))
         {

@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     private float _timer;
     private bool _shoot;
 
+    private ObjectPooler _objectPooler;
+
     private void OnEnable()
     {
         _inputActions.OnShootEvent += OnShoot;

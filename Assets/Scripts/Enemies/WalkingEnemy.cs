@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class WalkingEnemy : MonoBehaviour
 {
-    private Enemy enemy;
-    private Rigidbody2D rb;
-    private Vector3 direction;
+    private Enemy _enemy;
+    private Rigidbody2D _rb;
+    private Vector3 _direction;
+    private float _speed;
 
     private void Awake()
     {
-        enemy = GetComponent<Enemy>();
-        rb = GetComponent<Rigidbody2D>();
+        _enemy = GetComponent<Enemy>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        direction = (Vector3.zero - transform.position).normalized;
+        _speed = _enemy.Stats.Speed;
     }
 
     private void FixedUpdate()
     {
-        rb.velocity = direction * enemy.Stats.Speed;
+        _rb.velocity = (Vector3.zero - transform.position).normalized * _speed;
     }
-
-
 }
