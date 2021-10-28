@@ -26,3 +26,5 @@ MonoBehaviour:
   _baseDamage: 4
   _damageGrowth: 0.25
   _ammo: {fileID: 11400000, guid: bdcc4de17ddfafe4fbf55d330ce9e0b1, type: 2}
+  _recoil: 8
+  _accurcyGainPerLevel: 0.15

@@ -1,4 +1,4 @@
- using UnityEngine;
+using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(UnitHealth))]
@@ -41,10 +41,9 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Bullet bullet))
         {
-            if(!(bullet is FireBullet))
+            if (!(bullet is FireBullet))
             {
                 health.TakeDamage(bullet.Damage);
-                collision.gameObject.SetActive(false);
             }
         }
 

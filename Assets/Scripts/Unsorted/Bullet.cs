@@ -30,4 +30,15 @@ public class Bullet : MonoBehaviour
         Damage = damage;
         _spriteRenderer.sprite = ammoSO.Sprite;
     }
+
+    public virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Enemy"))
+        {
+
+            var particleEffect = ObjectPooler.Instance.GetObject(AmmoSO.ParticleEffecet);
+            particleEffect.transform.position = collision.ClosestPoint(transform.position);
+            gameObject.SetActive(false);
+        }
+    }
 }

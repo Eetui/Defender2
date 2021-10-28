@@ -4,6 +4,7 @@ using UnityEngine;
 public class Base : MonoBehaviour
 {
     private UnitHealth health;
+    [SerializeField] private GameObject hitParticle;
 
     private void Awake()
     {
@@ -15,6 +16,8 @@ public class Base : MonoBehaviour
         if (collision.TryGetComponent(out Enemy enemy))
         {
             health.TakeDamage(enemy.Stats.Damage);
+            var particle = ObjectPooler.Instance.GetObject(hitParticle);
+            particle.transform.position = collision.transform.position;
         }
     }
 }

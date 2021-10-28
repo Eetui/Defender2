@@ -24,6 +24,21 @@ public class FireBullet : Bullet
         StartCoroutine(LerpSizeAndSpeed(_duration));
     }
 
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+
+            var particleEffect = ObjectPooler.Instance.GetObject(AmmoSO.ParticleEffecet);
+            particleEffect.transform.position = collision.ClosestPoint(transform.position);
+
+            if(particleEffect.TryGetComponent<FollowTarget>(out FollowTarget followTarget))
+            {
+                followTarget.Target = collision.gameObject;
+            }
+        }
+    }
+
     private void OnDisable()
     {
         StopAllCoroutines();

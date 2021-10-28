@@ -6,7 +6,11 @@ using Cinemachine;
 public class CameraShake : MonoBehaviour
 {
     private CinemachineVirtualCamera virtualCam;
-    private Coroutine coroutine;
+
+    [SerializeField] private float shotShakeDurationReducer = 20;
+    [SerializeField] private float shotShakenIntensityReducer = 10;
+    private bool damageShakeEnabled;
+
 
     private void Awake()
     {
@@ -15,8 +19,11 @@ public class CameraShake : MonoBehaviour
 
     public void ShotCameraShake(float shakeIntensity)
     {
-        StopAllCoroutines();
-        StartCoroutine(LerpShake(shakeIntensity / 10, shakeIntensity / 5));
+        if (!damageShakeEnabled)
+        {
+            StopAllCoroutines();
+            StartCoroutine(LerpShake(shakeIntensity / shotShakeDurationReducer, shakeIntensity / shotShakenIntensityReducer));
+        }
     }
     private IEnumerator LerpShake(float duration, float shakeIntensity)
     {
@@ -32,4 +39,28 @@ public class CameraShake : MonoBehaviour
 
         camPerlinNoise.m_AmplitudeGain = 0f;
     }
+
+    public void DamageShake(float shakeIntensity)
+    {
+        damageShakeEnabled = true;
+        StopAllCoroutines();
+        StartCoroutine(DamageShakeLerp(shakeIntensity));
+    }
+
+    private IEnumerator DamageShakeLerp(float shakeIntensity)
+    {
+        float time = 0;
+        var camPerlinNoise = virtualCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        while (time < 1)
+        {
+            camPerlinNoise.m_AmplitudeGain = Mathf.Lerp(shakeIntensity, 0f, time / 1);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        camPerlinNoise.m_AmplitudeGain = 0f;
+        damageShakeEnabled = false;
+    }
+
 }

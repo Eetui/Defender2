@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9366ce475ac59dc4c94b368e3e0c4a2a, type: 3}
-  m_Name: Sniper Bullet
+  m_Name: Normal Bullet
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: d331768bf26834c4fa01c6eadc1a0aeb, type: 3}
-  _name: Sniper Bullet
-  _speed: 40
+  _sprite: {fileID: 21300000, guid: f8831b742915af848aa6976bfeceb504, type: 3}
+  _name: Basic Bullet
+  _speed: 30
   baseBulletPrefab: {fileID: 8909351723352089554, guid: c51993efded86484590bad34e407763d, type: 3}
+  _particleEffecet: {fileID: 4168593155150082979, guid: 8ff2a0a17b053b747a271f6b040eafbe, type: 3}
+  _shellParticleEffecet: {fileID: 7776074172838157958, guid: b6064c22560e3f1478a93847ea7e0b1b, type: 3}

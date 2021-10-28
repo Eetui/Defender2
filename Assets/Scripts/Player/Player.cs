@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private InventorySO _inventory;
     [SerializeField] private Transform _gunPoint;
+    [SerializeField] private Transform _gunShellPoint;
     [SerializeField] private CameraShake _cameraShake;
 
     public UnityEvent OnGunShot;
@@ -62,7 +63,7 @@ public class Player : MonoBehaviour
         {
             if (CanShoot(gun))
             {
-                gun.Shoot(_gunPoint.position, _gunPoint.rotation);
+                gun.Shoot(_gunPoint.position, _gunPoint.rotation, _gunShellPoint.position);
 
                 if (gun.Bullet is FireBullet)
                 {

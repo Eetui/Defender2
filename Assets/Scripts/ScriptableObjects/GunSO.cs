@@ -15,6 +15,9 @@ public class GunSO : ItemSO, IShootable
     [SerializeField] private float _damageGrowth;
 
     [SerializeField] private AmmoSO _ammo;
+
+    [SerializeField] private float _recoil;
+    [SerializeField] private float _accurcyGainPerLevel;
      
 
     #region Properties
@@ -42,6 +45,8 @@ public class GunSO : ItemSO, IShootable
 
     public Bullet Bullet { get; private set; }
 
+    public float Recoil => Mathf.Clamp(_recoil - (_accurcyGainPerLevel * Level), 0, Mathf.Infinity);
+
     #endregion
 
     private void OnEnable()
@@ -57,12 +62,24 @@ public class GunSO : ItemSO, IShootable
         _currentLevel++;
     }
 
-    public void Shoot(Vector3 ShootingPoint, Quaternion quaternion)
+    public void Shoot(Vector3 ShootingPoint, Quaternion quaternion, Vector3 gunShellPos)
     {
+        //pool shots
         var ammo = ObjectPooler.Instance.GetObject(Ammo.baseBulletPrefab);
         ammo.transform.position = ShootingPoint;
-        ammo.transform.rotation = quaternion;
 
+        //recoil
+        var randomRecoil = Quaternion.Euler(0, 0, Random.Range(-Recoil, Recoil));
+        ammo.transform.rotation = quaternion * randomRecoil;
+
+        //pooled particle effect
+        if(Ammo.ShellParticleEffecet)
+        {
+            var shell = ObjectPooler.Instance.GetObject(Ammo.ShellParticleEffecet);
+            shell.transform.position = gunShellPos;
+        }
+
+        //setup bullet
         if (ammo.TryGetComponent(out Bullet bullet))
         {
             bullet.SetUpBullet(Ammo, Damage);
