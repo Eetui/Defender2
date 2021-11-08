@@ -15,5 +15,6 @@ MonoBehaviour:
   _sprite: {fileID: 21300000, guid: 00c79a6ec86a084419303a630d03c72e, type: 3}
   _name: Fire
   _speed: 5
+  BaseBulletPrefab: {fileID: 6206481520043804412, guid: 8ecd902c088bd314eb6b7ccc2750a54c, type: 3}
   _particleEffecet: {fileID: 4506279990528777050, guid: 86035ea6f484c274eb334588f482b730, type: 3}
-  baseBulletPrefab: {fileID: 6206481520043804412, guid: 8ecd902c088bd314eb6b7ccc2750a54c, type: 3}
+  _shellParticleEffecet: {fileID: 0}

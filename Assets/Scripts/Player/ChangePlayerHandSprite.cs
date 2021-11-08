@@ -23,10 +23,9 @@ public class ChangePlayerHandSprite : MonoBehaviour
         if(player.CurrentItem != null)
         {
             handSprite.sprite = player.CurrentItem.ItemIcon;
+            return;
         }
-        else
-        {
-            handSprite.sprite = emptyHandSprite;
-        }
+
+        handSprite.sprite = emptyHandSprite;
     }
 }

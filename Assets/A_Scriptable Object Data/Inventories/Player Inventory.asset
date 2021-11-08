@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8fa4a3bcf0644554c9ae0661b4974b6b, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  resetInventoryOnEnable: 1
+  _resetOnEnable: 1

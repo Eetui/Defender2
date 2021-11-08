@@ -10,7 +10,7 @@ public class ShopItemInfo : MonoBehaviour
     [SerializeField] private ShopManager shopManager;
 
     [Header("General")]
-    [SerializeField] private Image itemImage;
+    [SerializeField] private Image image;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private TMP_Text stacksText;
     [SerializeField] private TMP_Text sellForText;
@@ -40,7 +40,7 @@ public class ShopItemInfo : MonoBehaviour
         {
             shopItemInfoPanel.SetActive(true);
 
-            itemImage.sprite = item.ItemIcon;
+            image.sprite = item.ItemIcon;
             nameText.text = item.Name;
             stacksText.text = $"Stacks: {item.Stack}";
             sellForText.text = $"Sell for: {item.SellAmount}";

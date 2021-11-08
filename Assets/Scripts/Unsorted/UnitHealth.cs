@@ -63,10 +63,9 @@ public class UnitHealth : MonoBehaviour
         if (_health.Value <= 0)
         {
             OnDie.Invoke();
+            return;
         }
-        else
-        {
-            OnTakeDamage.Invoke();
-        }
+
+        OnTakeDamage.Invoke();
     }
 }

@@ -13,12 +13,11 @@ public class ObjectPooler : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
             return;
         }
+
+        Destroy(gameObject);
+        return;
     }
 
     public GameObject GetObject(GameObject gameObject)
@@ -29,17 +28,13 @@ public class ObjectPooler : MonoBehaviour
             {
                 return CreateNewObject(gameObject);
             }
-            else
-            {
-                GameObject gObject = pool.Dequeue();
-                gObject.SetActive(true);
-                return gObject;
-            }
+
+            GameObject gObject = pool.Dequeue();
+            gObject.SetActive(true);
+            return gObject;
         }
-        else
-        {
-            return CreateNewObject(gameObject);
-        }
+
+        return CreateNewObject(gameObject);
     }
 
     public GameObject CreateNewObject(GameObject gameObject)
@@ -54,14 +49,13 @@ public class ObjectPooler : MonoBehaviour
         if (pools.TryGetValue(gameObject.name, out Queue<GameObject> pool))
         {
             pool.Enqueue(gameObject);
-        }
-        else
-        {
-            Queue<GameObject> newPool = new Queue<GameObject>();
-            newPool.Enqueue(gameObject);
-            pools.Add(gameObject.name, newPool);
+            gameObject.SetActive(false);
+            return;
         }
 
+        Queue<GameObject> newPool = new Queue<GameObject>();
+        newPool.Enqueue(gameObject);
+        pools.Add(gameObject.name, newPool);
         gameObject.SetActive(false);
     }
 

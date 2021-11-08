@@ -6,7 +6,8 @@ public class AmmoSO : ScriptableObject
     [SerializeField] private Sprite _sprite;
     [SerializeField] private string _name = "New Bullet";
     [SerializeField] private float _speed;
-    public GameObject baseBulletPrefab;
+    public GameObject BaseBulletPrefab;
+
     [Header("Particles")]
     [SerializeField] private GameObject _particleEffecet;
     [SerializeField] private GameObject _shellParticleEffecet;

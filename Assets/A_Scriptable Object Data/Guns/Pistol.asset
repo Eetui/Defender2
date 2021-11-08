@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   _name: Pistol
-  _itemIcon: {fileID: 21300000, guid: dfc8b47f250470547a010c8cab003f30, type: 3}
+  _icon: {fileID: 21300000, guid: dfc8b47f250470547a010c8cab003f30, type: 3}
   _cost: 100
   _stackable: 0
   _stack: 1

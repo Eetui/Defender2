@@ -17,4 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 38839a446a31e404d8d8087654464626, type: 2}
   - {fileID: 11400000, guid: 3f18ea9bf47a1904c963628e47e71480, type: 2}
   - {fileID: 11400000, guid: 98313778c2402d34d92e6dda2c2aef89, type: 2}
-  resetInventoryOnEnable: 1
+  _resetOnEnable: 1

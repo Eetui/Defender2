@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public virtual void SetUpBullet(AmmoSO ammoSO, float damage)
+    public virtual void SetUp(AmmoSO ammoSO, float damage)
     {
         AmmoSO = ammoSO;
         Damage = damage;

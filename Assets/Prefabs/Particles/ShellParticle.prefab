@@ -1296,7 +1296,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    separateAxes: 0
+    separateAxes: 1
   ColorModule:
     enabled: 0
     gradient:
@@ -3447,10 +3447,10 @@ ParticleSystem:
     range: {x: 0, y: 1}
     separateAxes: 0
   RotationBySpeedModule:
-    enabled: 0
+    enabled: 1
     x:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -3503,7 +3503,7 @@ ParticleSystem:
         m_RotationOrder: 4
     y:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -3556,9 +3556,9 @@ ParticleSystem:
         m_RotationOrder: 4
     curve:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.7853982
-      minScalar: 0.7853982
+      minMaxState: 3
+      scalar: 0
+      minScalar: 0.87266463
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3607,7 +3607,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    separateAxes: 0
+    separateAxes: 1
     range: {x: 0, y: 1}
   ColorBySpeedModule:
     enabled: 0
@@ -4882,7 +4882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3faaec8744277614c853475cc74b793b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 7776074172838157952}
+  _particleSystem: {fileID: 0}
 --- !u!114 &7776074172838157964
 MonoBehaviour:
   m_ObjectHideFlags: 0

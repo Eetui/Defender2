@@ -4,10 +4,9 @@ using TMPro;
 
 public class ShopItem : MonoBehaviour
 {
-
-    [SerializeField] private TMP_Text itemName;
-    [SerializeField] private TMP_Text itemCost;
-    [SerializeField] private Image itemImage;
+    [SerializeField] private TMP_Text _name;
+    [SerializeField] private TMP_Text _cost;
+    [SerializeField] private Image _image;
 
     public ItemSO Item { get; private set; }
 
@@ -15,8 +14,8 @@ public class ShopItem : MonoBehaviour
     {
         Item = item;
 
-        itemName.text = Item.Name;
-        itemCost.text = $"Cost: {Item.Cost}";
-        itemImage.sprite = Item.ItemIcon;
+        _name.text = Item.Name;
+        _cost.text = $"Cost: {Item.Cost}";
+        _image.sprite = Item.ItemIcon;
     }
 }

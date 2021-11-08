@@ -5,27 +5,27 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "Inventory", menuName = "ScriptableObjects/Inventory")]
 public class InventorySO : ScriptableObject
 {
-    [HideInInspector] public List<ItemSO> Inventory { get { return currentInventory; } }
+    [HideInInspector] public List<ItemSO> Inventory { get { return _currentInventory; } }
 
     [SerializeField]
     private List<ItemSO> _inventory = new List<ItemSO>(3);
-    private List<ItemSO> currentInventory = new List<ItemSO>(3);
+    private List<ItemSO> _currentInventory = new List<ItemSO>(3);
 
 
-    [SerializeField] private bool resetInventoryOnEnable;
+    [SerializeField] private bool _resetOnEnable;
 
     public event UnityAction OnValueChanged = delegate { };
     public event UnityAction OnEmptyInventory = delegate { };
 
     private void OnEnable()
     {
-        if (resetInventoryOnEnable)
+        if (_resetOnEnable)
         {
-            ResetInventory();
+            Reset();
         }
     }
 
-    public void ResetInventory()
+    public void Reset()
     {
 
         foreach (var item in _inventory)
@@ -36,23 +36,23 @@ public class InventorySO : ScriptableObject
                 gun.Reset();
         }
 
-        currentInventory.Clear();
+        _currentInventory.Clear();
 
         for (int i = 0; i < _inventory.Count; i++)
         {
-            currentInventory.Add(_inventory[i]);
+            _currentInventory.Add(_inventory[i]);
         }
 
         OnValueChanged?.Invoke();
     }
 
-    public bool AddItem(ItemSO item, out int index) //out index so we can get what was the most recent item
+    public bool Add(ItemSO item, out int index) //out index so we can get what was the most recent item
     {
-        for (int i = 0; i < currentInventory.Count; i++)
+        for (int i = 0; i < _currentInventory.Count; i++)
         {
-            if (currentInventory[i] == null)
+            if (_currentInventory[i] == null)
             {
-                currentInventory[i] = item;
+                _currentInventory[i] = item;
                 OnValueChanged?.Invoke();
                 index = i;
                 return true;
@@ -63,34 +63,31 @@ public class InventorySO : ScriptableObject
         return false;
     }
 
-    public void RemoveItem(int itemSlot)
+    public void Remove(int itemSlot)
     {
-        currentInventory[itemSlot] = null;
+        _currentInventory[itemSlot] = null;
         OnValueChanged?.Invoke();
-        CheckForEmptyInventory();
+        CheckForEmptySpace();
     }
 
-    public bool RemoveItem(ItemSO item)
+    public bool Remove(ItemSO item)
     {
         if (item == null) return false; 
 
-        int index = currentInventory.FindIndex(a => a == item);
+        int index = _currentInventory.FindIndex(a => a == item);
 
         if (index != -1)
         {
-            currentInventory[index] = null;
+            _currentInventory[index] = null;
             OnValueChanged?.Invoke();
-            CheckForEmptyInventory();
+            CheckForEmptySpace();
             return true;
         }
-        else
-        {
-            Debug.Log("No items removed");
-            return false;
-        }
+
+        return false;
     }
 
-    private void CheckForEmptyInventory()
+    private void CheckForEmptySpace()
     {
         foreach (var item in Inventory)
         {

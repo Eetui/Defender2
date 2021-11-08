@@ -76,49 +76,30 @@ public class ShopManager : MonoBehaviour
 
     public void BuyItem(ItemSO item)
     {
-        if (_playerInventory.Inventory.Contains(item) && item.Stackable)
+        if (_playerInventory.Inventory.Contains(item) && item.Stackable && _playerMoney.Value >= item.Cost)
         {
-            if (_playerMoney.Value >= item.Cost)
-            {
-                item.AddStack();
-                _playerMoney.ApplyChange(-item.Cost);
-                OnUiUpdateNeeded.Invoke();
-            }
+            _playerMoney.ApplyChange(-item.Cost);
+            item.AddStack();
+            OnUiUpdateNeeded.Invoke();
+            return;
         }
-        else if (!_playerInventory.Inventory.Contains(item))
-        {
-            int addedIndex = 0;
 
-            if (_playerMoney.Value >= item.Cost)
-            {
-                if (_playerInventory.AddItem(item, out addedIndex))
-                {
-                    _playerMoney.ApplyChange(-item.Cost);
-                    SetActiveShopItem(addedIndex);
-                    OnUiUpdateNeeded.Invoke();
-                }
-                else
-                {
-                    Debug.LogWarning("No empty slots for new items");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Not enough money");
-            }
+        if (!_playerInventory.Inventory.Contains(item) && _playerMoney.Value >= item.Cost && _playerInventory.Add(item, out int addedIndex))
+        {
+            _playerMoney.ApplyChange(-item.Cost);
+            SetActiveShopItem(addedIndex);
+            OnUiUpdateNeeded.Invoke();
+            return;
         }
     }
 
     public void BuyUpgrade(ItemSO item)
     {
-        if (item is GunSO gun)
+        if (item is GunSO gun && _playerMoney.Value >= gun.UpgradeCost)
         {
-            if (_playerMoney.Value >= gun.UpgradeCost)
-            {
-                _playerMoney.ApplyChange(-gun.UpgradeCost);
-                gun.LevelUp();
-                OnUiUpdateNeeded.Invoke();
-            }
+            _playerMoney.ApplyChange(-gun.UpgradeCost);
+            gun.LevelUp();
+            OnUiUpdateNeeded.Invoke();
         }
     }
 
@@ -133,20 +114,21 @@ public class ShopManager : MonoBehaviour
             SetActiveShopItem(GetActiveShopItemIndex());
             return;
         }
-        else if (_playerInventory.RemoveItem(item))
+
+        if (_playerInventory.Remove(item))
         {
             if (item is GunSO gun)
             {
                 _playerMoney.ApplyChange(gun.SellAmount);
+                SetActiveShopItem(GetActiveShopItemIndex());
                 gun.Reset();
-            }
-            else
-            {
-                _playerMoney.ApplyChange(item.SellAmount);
-                item.ResetStacks();
+                return;
             }
 
+            _playerMoney.ApplyChange(item.SellAmount);
             SetActiveShopItem(GetActiveShopItemIndex());
+            item.ResetStacks();
+
         }
     }
 

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class CameraBounds : MonoBehaviour
 {
-    private Camera cam;
-    private float camX, camY;
+    private Camera _cam;
+    private float _camX, _camY;
 
     private void Awake()
     {
-        cam = Camera.main;
-        camX = ((float)Screen.width / (float)Screen.height * cam.orthographicSize * 2) / 2;
-        camY = cam.orthographicSize;
+        _cam = Camera.main;
+        _camX = ((float)Screen.width / (float)Screen.height * _cam.orthographicSize * 2) / 2;
+        _camY = _cam.orthographicSize;
     }
 
     public Vector2 GetRandomPointOffScreen()
@@ -21,16 +21,15 @@ public class CameraBounds : MonoBehaviour
 
         while (true)
         {
-            var x = Random.Range(-camX - extra, camX + extra);
-            var y = Random.Range(-camY - extra, camY + extra);
+            var x = Random.Range(-_camX - extra, _camX + extra);
+            var y = Random.Range(-_camY - extra, _camY + extra);
 
-            if (x > camX + offTheScreenGuard || x < -camX - offTheScreenGuard) // + 2 to not spawn enemies on the edge of the screen
+            if (x > _camX + offTheScreenGuard || x < -_camX - offTheScreenGuard) // + - 2 to not spawn enemies on the edge of the screen
             {
-
                 return new Vector2(x, y);
             }
 
-            if (y > camY + offTheScreenGuard || y < -camY - offTheScreenGuard)
+            if (y > _camY + offTheScreenGuard || y < -_camY - offTheScreenGuard)
             {
                 return new Vector2(x, y);
             }

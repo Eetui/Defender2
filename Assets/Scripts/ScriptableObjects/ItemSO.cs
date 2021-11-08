@@ -4,7 +4,7 @@ using UnityEngine;
 public class ItemSO : ScriptableObject
 {
     [SerializeField] private protected string _name;
-    [SerializeField] private protected Sprite _itemIcon;
+    [SerializeField] private protected Sprite _icon;
     [SerializeField] private protected float _cost;
     [SerializeField] private protected bool _stackable = false;
     [SerializeField] private protected int _stack = 1;
@@ -14,7 +14,7 @@ public class ItemSO : ScriptableObject
     #region Properties
 
     public string Name => _name;
-    public Sprite ItemIcon => _itemIcon;
+    public Sprite ItemIcon => _icon;
     public float Cost => _cost;
     public bool Stackable => _stackable;
     public virtual float SellAmount => _cost / 2;

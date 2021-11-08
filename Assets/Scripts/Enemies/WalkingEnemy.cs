@@ -29,10 +29,10 @@ public class WalkingEnemy : MonoBehaviour
 
     public void Slow(float duration)
     {
-        StartCoroutine(SlowCoroutine(duration));
+        StartCoroutine(SlowSpeed(duration));
     }
 
-    private IEnumerator SlowCoroutine(float duration)
+    private IEnumerator SlowSpeed(float duration)
     {
         float startSpeed = _speed;
         _speed *= slowMult;

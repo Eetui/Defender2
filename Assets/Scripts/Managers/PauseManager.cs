@@ -20,11 +20,10 @@ public class PauseManager : MonoBehaviour
         if (_pausePanel.activeInHierarchy)
         {
             Resume();
+            return;
         }
-        else
-        {
-            Pause();
-        }
+
+        Pause();
     }
 
     private void Pause()

@@ -9,7 +9,7 @@ public class EnemyHealthbar : MonoBehaviour
     private FloatSO _maxHealth;
     private FloatSO _health;
 
-    [SerializeField] private Image _healthImage;
+    [SerializeField] private Image _image;
 
     private void Awake()
     {
@@ -27,6 +27,6 @@ public class EnemyHealthbar : MonoBehaviour
 
     private void UpdateHealthbar()
     {
-        _healthImage.fillAmount = Mathf.Clamp01(_health.Value/_maxHealth.Value);
+        _image.fillAmount = Mathf.Clamp01(_health.Value/_maxHealth.Value);
     }
 }
